@@ -1,0 +1,38 @@
+body,
+html {
+    height: 100vh;
+    margin: 0;
+}
+
+.Main {
+    header {
+        position: fixed;
+        background: white;
+        width: 100vw;
+    }
+
+    h2 {
+        display: inline;
+    }
+
+    ul {
+        display: inline;
+
+        li {
+            display: inline;
+        }
+    }
+}
+
+.MainContainer {
+    height: 100vh;
+    background-image: url('../Resources/NASA.JPG');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    p {
+        padding: 0;
+        margin: 0;
+    }
+}
