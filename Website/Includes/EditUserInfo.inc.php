@@ -4,11 +4,14 @@
     
 
     if(isset($_POST['SaveBtn'])){
-        $uID = $_POST['uID'];
+        $uID = $_SESSION['userID'];
+        $uRole = $_POST['uRole'];
         $uName = $_POST['uName'];
         $uMail = $_POST['uMail'];
         $ActiveUserName = $_SESSION['ActiveUserName'];
+        $ActiveUserRole = $_SESSION['userRole'];
 
+        
 
         //Checks if one or more field is empty
         if(empty($uName) || empty($uMail)){
@@ -34,52 +37,148 @@
             exit();
         }
         else{
-            if($uName != $ActiveUserName){
-                $sql = "SELECT UserName FROM users WHERE UserName=?;";
-                $stmt = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmt, $sql)){
-                header("Location: ../PHP/UserEdit.php?error=sqlError1");
-                exit();
-                }
-                else{
-                    mysqli_stmt_bind_param($stmt, "s", $uName);
-                    //Runs user info in DB
-                    mysqli_stmt_execute($stmt);
-                    //Takes result from DB and stores it in $stmt
-                    mysqli_stmt_store_result($stmt);
-                    //Checks amount of results from DB
-                    //Stores that value to $resultCheck
-                    //Either 0 or 1 is acceptable values
-                    //1 if there is a match
-                    //0 if no match was found
-                    $resultCheck = mysqli_stmt_num_rows($stmt);
-                    if($resultCheck > 0){
-                        header('Location: ../PHP/UserEdit.php?error=usernametaken');
-                        exit();
+            if($_SESSION['userRole'] == 'Admin'){
+                if($uName != $ActiveUserName){
+                    $sql = "SELECT UserName FROM users WHERE UserName=?;";
+                    $stmt = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmt, $sql)){
+                    header("Location: ../PHP/UserEdit.php?error=sqlError1");
+                    exit();
                     }
                     else{
-                        $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail' WHERE UserID='$uID'";
-                        if(mysqli_query($conn,$sql)){
-                            echo "Record updated successfully";
-                            header("Location: ../PHP/UserEdit.php?success=updated1");
+                        mysqli_stmt_bind_param($stmt, "s", $uName);
+                        //Runs user info in DB
+                        mysqli_stmt_execute($stmt);
+                        //Takes result from DB and stores it in $stmt
+                        mysqli_stmt_store_result($stmt);
+                        //Checks amount of results from DB
+                        //Stores that value to $resultCheck
+                        //Either 0 or 1 is acceptable values
+                        //1 if there is a match
+                        //0 if no match was found
+                        $resultCheck = mysqli_stmt_num_rows($stmt);
+                        if($resultCheck > 0){
+                            header('Location: ../PHP/EditUser.php?error=usernametaken');
                             exit();
                         }
                         else{
-                            echo "Error updating record: " . mysqli_error($conn);
+
+                            switch($uRole){
+                                case 'Admin':
+                                    $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail', UserRole='$uRole' WHERE UserID='$uID'";
+                                    if(mysqli_query($conn,$sql)){
+                                        echo "Record updated successfully";
+                                        header("Location: ../PHP/EditUser.php?success=updated1");
+                                        exit();
+                                    }
+                                    else{
+                                        echo "Error updating record: " . mysqli_error($conn);
+                                    }
+                                break;
+                                case 'User':
+                                    $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail', UserRole='$uRole' WHERE UserID='$uID'";
+                                    if(mysqli_query($conn,$sql)){
+                                        echo "Record updated successfully";
+                                        header("Location: ../PHP/EditUser.php?success=updated1");
+                                        exit();
+                                    }
+                                    else{
+                                        echo "Error updating record: " . mysqli_error($conn);
+                                    }
+                                break;
+                                default:
+                                    header("Location: ../PHP/EditUser.php?error=InvalidUserRole1");
+                                    exit();
+                                break;
+                            }
+
+                            
                         }
+                    }
+                }
+                else{
+                    switch($uRole){
+                        case 'Admin':
+                            $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail', UserRole='$uRole' WHERE UserID='$uID'";
+                            if(mysqli_query($conn,$sql)){
+                                echo "Record updated successfully";
+                                header("Location: ../PHP/EditUser.php?success=updated1");
+                                exit();
+                            }
+                            else{
+                                echo "Error updating record: " . mysqli_error($conn);
+                            }
+                        break;
+                        case 'User':
+                            $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail', UserRole='$uRole' WHERE UserID='$uID'";
+                            if(mysqli_query($conn,$sql)){
+                                echo "Record updated successfully";
+                                header("Location: ../PHP/EditUser.php?success=updated1");
+                                exit();
+                            }
+                            else{
+                                echo "Error updating record: " . mysqli_error($conn);
+                            }
+                        break;
+                        default:
+                            header("Location: ../PHP/EditUser.php?error=InvalidUserRole2");
+                            exit();
+                        break;
+                    }
+                }
+            }
+            elseif($_SESSION['userRole'] == 'User'){
+                if($uName != $ActiveUserName){
+                    $sql = "SELECT UserName FROM users WHERE UserName=?;";
+                    $stmt = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmt, $sql)){
+                    header("Location: ../PHP/UserEdit.php?error=sqlError1");
+                    exit();
+                    }
+                    else{
+                        mysqli_stmt_bind_param($stmt, "s", $uName);
+                        //Runs user info in DB
+                        mysqli_stmt_execute($stmt);
+                        //Takes result from DB and stores it in $stmt
+                        mysqli_stmt_store_result($stmt);
+                        //Checks amount of results from DB
+                        //Stores that value to $resultCheck
+                        //Either 0 or 1 is acceptable values
+                        //1 if there is a match
+                        //0 if no match was found
+                        $resultCheck = mysqli_stmt_num_rows($stmt);
+                        if($resultCheck > 0){
+                            header('Location: ../PHP/EditUser.php?error=usernametaken');
+                            exit();
+                        }
+                        else{
+                            $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail' WHERE UserID='$uID'";
+                            if(mysqli_query($conn,$sql)){
+                                echo "Record updated successfully";
+                                header("Location: ../PHP/EditUser.php?success=updated1");
+                                exit();
+                            }
+                            else{
+                                echo "Error updating record: " . mysqli_error($conn);
+                            }
+                        }
+                    }
+                }
+                else{
+                    $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail' WHERE UserID='$uID'";
+                    if(mysqli_query($conn,$sql)){
+                        echo "Record updated successfully";
+                        header("Location: ../PHP/EditUser.php?success=updated2");
+                        exit();
+                    }
+                    else{
+                        echo "Error updating record: " . mysqli_error($conn);
                     }
                 }
             }
             else{
-                $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail' WHERE UserID='$uID'";
-                if(mysqli_query($conn,$sql)){
-                    echo "Record updated successfully";
-                    header("Location: ../PHP/UserEdit.php?success=updated2");
-                    exit();
-                }
-                else{
-                    echo "Error updating record: " . mysqli_error($conn);
-                }
+                header("Location: ../PHP/Index.php?error=InvalidUserID");
+                exit();
             }
         }
     }

@@ -4,10 +4,10 @@ require 'dbh.inc.php';
 //Checks if submit btn has been pressed.
 if(isset($_POST['signup-submit'])){
 
-    $username = $_POST['uid'];
-    $Email = $_POST['mail'];
-    $Pwd = $_POST['pwd'];
-    $Pwd_Verify = $_POST['pwd-verify'];
+    $username = $_POST['uName'];
+    $Email = $_POST['uMail'];
+    $Pwd = $_POST['uPass'];
+    $Pwd_Verify = $_POST['uPassVer'];
     $UserRole = "User";
 
     //Checks if one or more field is empty

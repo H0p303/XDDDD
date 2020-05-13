@@ -1,25 +1,83 @@
+<?php
+    require '../Includes/dbh.inc.php';
+    SESSION_START();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/Style.css">
+    <link rel="stylesheet" href="../Style/Index.css">
     <title>XDDDDDD</title>
 </head>
 <body>
     
     <div class="Main">
-        <header>
-            <h2>XDDDD</h2>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Signup</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
+
+        <?php
+
+            if(isset($_SESSION['userID'])){
+                echo '<header>
+            <div class="navBar">
+                <ul>
+                    <li id="Title"><a href="Index.php">XDDDD</a></li>
+                    <li><a href="Index.php">Home</a></>
+                    <li><a href="Form.php">Form</a></li>
+                    <li><a href="../Includes/Logout.inc.php">Logout</a></li>
+                </ul>
+            </div>
         </header>
         <div class="MainContainer">
-        <p>asdasd</p>
-        </div>
+        <p></p>
+        </div>';
+            }
+            else{
+                echo '<header>
+                <div class="navBar">
+                    <ul>
+                        <li id="Title"><a href="#">XDDDD</a></li>
+                        <li><a href="Index.php">Home</a></>
+                        <li><a href="Signup.php">Signup</a></li>
+                        <li><a href="Login.php">Login</a></li>
+                    </ul>
+                </div>
+            </header>
+            <div class="MainContainer">
+            <p></p>
+            </div>';
+            }
+        ?>
+
+        <?php
+            if(isset($_SESSION['userID'])){
+                if($_SESSION['userRole'] == 'Admin'){
+                    echo '
+                    <div class="EditUser">
+                        <a href="EditUser.php">Edit User</a>
+                    </div>
+                    <div class="EditUserAdmin">
+                        <a href="EditUserAdmin.php">Edit UserRole</a>
+                    </div>
+                    <div class="MakePost">
+                        <a href="MakePost.php">Make Post</a>
+                    </div>';
+                }
+                elseif($_SESSION['userRole'] == 'User'){
+                    echo '
+                    <div class="EditUser">
+                        <a href="EditUser.php">Edit User</a>
+                    </div>
+                    <div class="MakePost">
+                        <a href="MakePost.php">Make Post</a>
+                    </div>';
+                }
+            }
+        ?>
+
+        
+
+        
     </div>
 
 </body>

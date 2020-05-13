@@ -2,10 +2,10 @@
 
 require 'dbh.inc.php';
 //checks if login submit btn has been pressed
-if(isset($_POST['Login-Submit'])){
+if(isset($_POST['Login_Button'])){
  
-    $mailuid = $_POST['mailuid'];
-    $Pwd = $_POST['pwd'];
+    $mailuid = $_POST['uName'];
+    $Pwd = $_POST['uPass'];
 
     //checks if either field is empty and redirects if necessary
     if(empty($mailuid) || empty($Pwd)){
