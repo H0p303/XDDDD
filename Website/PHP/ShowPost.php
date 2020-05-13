@@ -1,7 +1,6 @@
 <?php
-
     require '../Includes/dbh.inc.php';
-    SESSIOn_START();
+    SESSION_START();
 ?>
 
 <!DOCTYPE html>
@@ -49,24 +48,28 @@
 
         <div class="PostSneakContainer">
             <?php
-                $sql = "SELECT PostID, PostTitle, PostBody, OwnerID FROM posts";
+            if(isset($_GET['ViewPost'])){
+                $PostID = $_GET['PostID'];
+                $sql = "SELECT PostID, PostTitle, PostBody, OwnerID FROM posts WHERE PostID=$PostID";
                 $result = $conn->query($sql);
                 if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
-                        $PostBtn= $row['PostID'];
-                        $SneakPeak = substr($row['PostBody'], 0, 300);
-                        echo '<form action="ShowPost.php" method="get" class="PostSneakBox">';
+                        echo '<div class="PostSneakBox">';
                         echo '<h2 id="PostSneakTitle">' . $row['PostTitle'];
                         echo '</h2>';
-                        echo '<p id="PostSneakBody">' . $SneakPeak;
+                        echo '<p id="PostSneakBody">' . $row['PostBody'];
                         echo '</p>';
-                        echo '<input id="InputID" name="PostID" readonly value="'. $row['PostID'] .'">';
-                        echo '<button type="submit" name="ViewPost" class="PostSneakView">View</button>';
-                        echo '</form>';
+                        echo '</div>';
                     }
                 }
+            }
+            else{
+                header("Location: ../Form.php?failed");
+                exit();
+            }
             ?>
         </div>
+
     </div>
 </body>
 </html>

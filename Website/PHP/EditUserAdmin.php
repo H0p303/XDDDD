@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>XDDDD</title>
     <link rel="stylesheet" href="../Style/Index.css">
 </head>
 <body>
@@ -55,7 +55,6 @@ else{
 ?>
     <div class='UserEditList'>
         <?php
-
         $sql = "SELECT UserID, UserName, UserEmail, UserRole FROM users";
         $result = $conn -> query($sql);
         if ($result -> num_rows > 0){
