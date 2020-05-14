@@ -21,6 +21,7 @@
         </header>
         <div class="MainContainer">
             <div class="SignupForm">
+            <!--Sends info to signup.inc.php-->
                 <form action="../Includes/Signup.inc.php" method="post">
                     <label for="uName">UserName</label>
                     <input type="text" name="uName" id="uName">

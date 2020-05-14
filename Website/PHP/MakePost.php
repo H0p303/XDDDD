@@ -14,7 +14,8 @@
 <body>
     <div class="Main">
         <?php
-
+            //Checks if user is logged in
+            //displays different layout depending on result
             if(isset($_SESSION['userID'])){
                 echo '<header>
             <div class="navBar">
@@ -49,11 +50,13 @@
 
         <?php
             $uID  = $_SESSION["userID"];
+            //Selects all from users where user id is same as session id
             $sql = "SELECT UserID, UserName, UserEmail, UserRole FROM users WHERE UserID=$uID";
             $result = $conn -> query($sql);
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     echo '<div class="UserPublishPost">';
+                    //Sends to PostPost.inc.php where post is added to DB
                     echo '<form method="post" action="../Includes/PostPost.inc.php">';
                     echo '<input required type="text" name="Title" placeholder="Enter Title">';
                     echo '<textarea required type="text" name="Body" placeholder="Enter Body"></textarea>';

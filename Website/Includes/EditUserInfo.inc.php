@@ -37,6 +37,8 @@
             exit();
         }
         else{
+            //Checks if user role is admin or user
+            //If userRole is Admin
             if($_SESSION['userRole'] == 'Admin'){
                 if($uName != $ActiveUserName){
                     $sql = "SELECT UserName FROM users WHERE UserName=?;";
@@ -62,8 +64,9 @@
                             exit();
                         }
                         else{
-
+                            //Checks $uRole value and updates different options depending on result
                             switch($uRole){
+                                
                                 case 'Admin':
                                     $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail', UserRole='$uRole' WHERE UserID='$uID'";
                                     if(mysqli_query($conn,$sql)){
@@ -97,6 +100,7 @@
                     }
                 }
                 else{
+                    //Checks $uRole value and updates different options depending on result
                     switch($uRole){
                         case 'Admin':
                             $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail', UserRole='$uRole' WHERE UserID='$uID'";
@@ -127,6 +131,7 @@
                     }
                 }
             }
+            //If userRole is User
             elseif($_SESSION['userRole'] == 'User'){
                 if($uName != $ActiveUserName){
                     $sql = "SELECT UserName FROM users WHERE UserName=?;";
@@ -164,6 +169,7 @@
                         }
                     }
                 }
+                //default value
                 else{
                     $sql = "UPDATE users SET UserName='$uName', UserEmail='$uMail' WHERE UserID='$uID'";
                     if(mysqli_query($conn,$sql)){
@@ -182,6 +188,7 @@
             }
         }
     }
+    //if not redirect
     else{
         header("Location: ../PHP/UserEdit.php?failed");
         exit();

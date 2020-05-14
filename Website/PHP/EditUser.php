@@ -14,6 +14,8 @@
 <body>
     <div class="Main">
     <?php
+            //Checks if user is logged in
+            //displays different layout depending on result
         if(isset($_SESSION['userID'])){
             echo '<header>
         <div class="navBar">
@@ -49,8 +51,11 @@
         <?php
         
             $uID = $_SESSION["userID"];
+            //Selects all info from users where userID is match with session id
             $sql = "SELECT UserID, UserName, UserEmail, UserRole FROM users WHERE UserID=$uID";
             $result = $conn -> query($sql);
+            //If user role is admin
+            //shows different layout depending on result
             if($_SESSION['userRole'] == 'Admin'){
                 if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
@@ -59,7 +64,7 @@
                     // // //TODO Make it check for user
                     // // //TODO And then allow change on user Role
                     // // //TODO Depening on SESSION['userRole']
-
+                    //sends info to edituser.inc.php where stuff is done
                     echo '<form action="../Includes/EditUserInfo.inc.php" method="post">';
                     echo '<div class="tooltip"><input type="text" name="uID" readonly required value="' . $row['UserID'] . '"><span class="tooltiptext">UserID</span></div>';
                     echo '<div class="tooltip"><input type="text" name="uRole" readonly required value="' . $row['UserRole'] . '"><span class="tooltiptext">Enter User Or Admin</span></div>';
@@ -74,6 +79,7 @@
                 if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
                         echo '<div class="UserEditList">';
+                        //sends info to edituser.inc.php where stuff is done
                         echo '<form action="../Includes/EditUserInfo.inc.php" method="post">';
                         echo '<div class="tooltip"><input type="text" name="uID" readonly required value="' . $row['UserID'] . '"><span class="tooltiptext">UserID</span></div>';
                         echo '<div class="tooltip"><input type="text" name="uRole" readonly required value="' . $row['UserRole'] . '"><span class="tooltiptext">Enter User Or Admin</span></div>';

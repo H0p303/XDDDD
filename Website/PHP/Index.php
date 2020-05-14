@@ -16,7 +16,8 @@
     <div class="Main">
 
         <?php
-
+            //checks if user is logged in
+            
             if(isset($_SESSION['userID'])){
                 echo '<header>
             <div class="navBar">
@@ -51,6 +52,8 @@
 
         <?php
             if(isset($_SESSION['userID'])){
+                //checks user role
+                //if user role admin
                 if($_SESSION['userRole'] == 'Admin'){
                     echo '
                     <div class="EditUser">
@@ -64,6 +67,7 @@
                     </div>';
                 }
                 elseif($_SESSION['userRole'] == 'User'){
+                    //if user role user
                     echo '
                     <div class="EditUser">
                         <a href="EditUser.php">Edit User</a>

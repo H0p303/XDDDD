@@ -21,44 +21,48 @@
     
 <div class="Main">
 <?php
-
-if(isset($_SESSION['userID'])){
-    echo '<header>
-<div class="navBar">
-    <ul>
-        <li id="Title"><a href="Index.php">XDDDD</a></li>
-        <li><a href="Index.php">Home</a></>
-        <li><a href="Form.php">Form</a></li>
-        <li><a href="../Includes/Logout.inc.php">Logout</a></li>
-    </ul>
-</div>
-</header>
-<div class="MainContainer">
-<p></p>
-</div>';
-}
-else{
-    echo '<header>
-    <div class="navBar">
-        <ul>
-            <li id="Title"><a href="#">XDDDD</a></li>
-            <li><a href="Index.php">Home</a></>
-            <li><a href="Signup.php">Signup</a></li>
-            <li><a href="Login.php">Login</a></li>
-        </ul>
-    </div>
-</header>
-<div class="MainContainer">
-<p></p>
-</div>';
-}
+    //Checks if user is logged in
+    //displays different layout depending on result
+    if(isset($_SESSION['userID'])){
+        echo '
+        <header>
+            <div class="navBar">
+                <ul>
+                    <li id="Title"><a href="Index.php">XDDDD</a></li>
+                    <li><a href="Index.php">Home</a></>
+                    <li><a href="Form.php">Form</a></li>
+                    <li><a href="../Includes/Logout.inc.php">Logout</a></li>
+                </ul>
+            </div>
+            </header>
+            <div class="MainContainer">
+            <p></p>
+        </div>';
+    }
+    else{
+        echo '<header>
+        <div class="navBar">
+            <ul>
+                <li id="Title"><a href="#">XDDDD</a></li>
+                <li><a href="Index.php">Home</a></>
+                <li><a href="Signup.php">Signup</a></li>
+                <li><a href="Login.php">Login</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="MainContainer">
+    <p></p>
+    </div>';
+    }
 ?>
     <div class='UserEditList'>
         <?php
+        //Selects all info from users
         $sql = "SELECT UserID, UserName, UserEmail, UserRole FROM users";
         $result = $conn -> query($sql);
         if ($result -> num_rows > 0){
             while($row = $result -> fetch_assoc()){
+                //sends info to edituserinfoadmin.inc.php where stuff is done
                 echo '<form action="../Includes/EditUserInfoAdmin.inc.php" method="post">';
                         echo '<div class="tooltip"><input type="text" name="uID" readonly required value="' . $row['UserID'] . '"><span class="tooltiptext">UserID</span></div>';
                         echo '<div class="tooltip"><input type="text" name="uRole" required value="' . $row['UserRole'] . '"><span class="tooltiptext">Enter User Or Admin</span></div>';

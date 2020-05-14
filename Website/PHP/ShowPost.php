@@ -14,6 +14,8 @@
 <body>
     <div class="Main">
         <?php
+            //Checks if user is logged in
+            //displays different layout depending on result
             if(isset($_SESSION['userID'])){
                 echo '<header>
             <div class="navBar">
@@ -48,8 +50,10 @@
 
         <div class="PostSneakContainer">
             <?php
+            //checks is button has been clicked
             if(isset($_GET['ViewPost'])){
                 $PostID = $_GET['PostID'];
+                //Selects all from posts where post id is same as the one clicked
                 $sql = "SELECT PostID, PostTitle, PostBody, OwnerID FROM posts WHERE PostID=$PostID";
                 $result = $conn->query($sql);
                 if($result->num_rows > 0){
@@ -63,6 +67,7 @@
                     }
                 }
             }
+            //if not clicked redirect
             else{
                 header("Location: ../Form.php?failed");
                 exit();

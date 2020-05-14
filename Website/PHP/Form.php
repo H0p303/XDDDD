@@ -1,7 +1,7 @@
 <?php
-
+    //starts session and adds dbh.inc.php to file
     require '../Includes/dbh.inc.php';
-    SESSIOn_START();
+    SESSION_START();
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +15,8 @@
 <body>
     <div class="Main">
         <?php
+            //Checks if user is logged in
+            //displays different layout depending on result
             if(isset($_SESSION['userID'])){
                 echo '<header>
             <div class="navBar">
@@ -49,10 +51,13 @@
 
         <div class="PostSneakContainer">
             <?php
+                //Selects all posts from posts
                 $sql = "SELECT PostID, PostTitle, PostBody, OwnerID FROM posts";
                 $result = $conn->query($sql);
                 if($result->num_rows > 0){
+                    //Checks if the amount of posts is more than 0
                     while($row = $result->fetch_assoc()){
+                        //loops through them all and shows info
                         $PostBtn= $row['PostID'];
                         $SneakPeak = substr($row['PostBody'], 0, 300);
                         echo '<form action="ShowPost.php" method="get" class="PostSneakBox">';
