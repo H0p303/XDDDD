@@ -60,16 +60,13 @@
                 if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     echo '<div class="UserEditList">';
-                    // // //TODO Fix EditUserInfo
-                    // // //TODO Make it check for user
-                    // // //TODO And then allow change on user Role
-                    // // //TODO Depening on SESSION['userRole']
                     //sends info to edituser.inc.php where stuff is done
                     echo '<form action="../Includes/EditUserInfo.inc.php" method="post">';
                     echo '<div class="tooltip"><input type="text" name="uID" readonly required value="' . $row['UserID'] . '"><span class="tooltiptext">UserID</span></div>';
                     echo '<div class="tooltip"><input type="text" name="uRole" readonly required value="' . $row['UserRole'] . '"><span class="tooltiptext">Enter User Or Admin</span></div>';
                     echo '<div class="tooltip"><input type="text" name="uName" required value="' . $row['UserName'] . '"><span class="tooltiptext">Enter Username</span></div>';
                     echo '<div class="tooltip"><input type="text" name="uMail" required value="' . $row['UserEmail'] . '"><span class="tooltiptext">Enter Email</span></div>';
+                    echo '<button id="RemoveUser" name="RemoveUserBtn">Delete Account</button>';
                     echo '<button type="submit" name="SaveBtn">Save Changes</button>';
                     echo '</form></div>';
                     }
@@ -85,6 +82,7 @@
                         echo '<div class="tooltip"><input type="text" name="uRole" readonly required value="' . $row['UserRole'] . '"><span class="tooltiptext">Enter User Or Admin</span></div>';
                         echo '<div class="tooltip"><input type="text" name="uName" required value="' . $row['UserName'] . '"><span class="tooltiptext">Enter Username</span></div>';
                         echo '<div class="tooltip"><input type="text" name="uMail" required value="' . $row['UserEmail'] . '"><span class="tooltiptext">Enter Email</span></div>';
+                        echo '<button id="RemoveUser" name="RemoveUserBtn">Delete Account</button>';
                         echo '<button type="submit" name="SaveBtn">Save Changes</button>';
                         echo '</form></div>';
                         }

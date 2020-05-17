@@ -49,7 +49,7 @@
             }
         ?>
 
-        <div class="PostSneakContainer">
+        <div class="PostSneakContainerForm">
             <?php
                 //Selects all posts from posts
                 $sql = "SELECT PostID, PostTitle, PostBody, OwnerID FROM posts";

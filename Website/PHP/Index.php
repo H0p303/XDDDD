@@ -62,6 +62,9 @@
                     <div class="EditUserAdmin">
                         <a href="EditUserAdmin.php">Edit UserRole</a>
                     </div>
+                    <div class="EditPostAdmin">
+                        <a href="EditPostAdmin.php">Edit Post</a>
+                    </div>
                     <div class="MakePost">
                         <a href="MakePost.php">Make Post</a>
                     </div>';
@@ -71,6 +74,9 @@
                     echo '
                     <div class="EditUser">
                         <a href="EditUser.php">Edit User</a>
+                    </div>
+                    <div class="EditPostUser">
+                        <a href="EditPostAdmin.php">Edit Post</a>
                     </div>
                     <div class="MakePost">
                         <a href="MakePost.php">Make Post</a>

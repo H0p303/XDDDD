@@ -188,6 +188,19 @@
             }
         }
     }
+    elseif(isset($_POST['RemoveUserBtn'])){
+        $uID = $_SESSION['userID'];
+        $sql = "DELETE FROM users WHERE userID=$uID";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Record deleted successfully";
+            header('Location: ../Includes/Logout.inc.php');
+            exit();
+        } 
+        else {
+            echo "Error deleting record: " . $conn->error;
+        }
+    }
     //if not redirect
     else{
         header("Location: ../PHP/UserEdit.php?failed");

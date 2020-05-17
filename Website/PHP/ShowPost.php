@@ -74,6 +74,47 @@
             }
             ?>
         </div>
+        <div class="PostCommentContainer">
+
+            <?php
+                //Shows all comment with selected post id
+                $PostID = $_GET['PostID'];
+                $sql = "SELECT commentID, commentBody, OwnerID FROM comments WHERE PostConnID=$PostID";
+                $result = $conn->query($sql);
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        echo '<form class="CommentBox" action="../Includes/DeleteComment.inc.php" method="get">';
+                        echo '<h3>UserID ' . $row['OwnerID'];
+                        echo '</h3>';
+                        echo '<input id="CommentID" name="CommentID" value="'. $row['commentID'] .'">';
+                        echo '<textarea readonly id="CommentBody">';
+                        echo $row['commentBody'];
+                        echo '</textarea>';
+                        echo '<button name="Delete" id="CommentDeleteBtn">Delete Comment</button>';
+                        echo '</form>';
+                    }
+                }
+            
+            ?>
+            <?php
+                //Connects comment to post via PostID
+                //Results in comment only showing for specific post
+                $PostID = $_GET['PostID'];
+                $sql = "SELECT PostID FROM posts WHERE PostID=$PostID";
+                $result = $conn->query($sql);
+                if($result->num_rows>0){
+                    while($row = $result->fetch_assoc()){
+                        echo "<form action='../Includes/PostComment.inc.php' method='post'>";
+                        echo '<input id="PostID" name="PostConnID" value="' . $row['PostID'] . '">';
+                        echo '<textarea type="text" name="Body" id="commentBody"></textarea>';
+                        echo '<button name="CommentBtn" id="CommentBtn" type="submit">Post Comment</button>';
+                        echo '</form>';
+                    }
+                }
+            ?>
+        </div>
+
+
 
     </div>
 </body>
