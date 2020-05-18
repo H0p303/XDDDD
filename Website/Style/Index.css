@@ -498,8 +498,8 @@ body::-webkit-scrollbar {
   border-radius: 4px;
 }
 
-.PostCommentContainer .CommentBox #CommentDeleteBtn {
-  margin: 0.5em 0 0.5em 0;
+.PostCommentContainer .CommentBox #CommentEditBtn {
+  margin: 0.5em 0.6em 0.5em 0.6em;
   border: none;
   background: white;
   padding: 0.2em 3em 0.2em 3em;
@@ -565,6 +565,51 @@ body::-webkit-scrollbar {
 
 .PostCommentContainer #CommentID {
   display: none;
+}
+
+.UserEditCommentBox {
+  position: fixed;
+  top: 30%;
+  width: 100%;
+  text-align: center;
+}
+
+.UserEditCommentBox form {
+  width: 25%;
+  margin: 0 auto;
+}
+
+.UserEditCommentBox form label {
+  display: inline-block;
+}
+
+.UserEditCommentBox form input {
+  text-align: center;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 12px 12px 12px 0;
+  display: block;
+}
+
+.UserEditCommentBox form button {
+  margin: 2em 1em 2em 1em;
+  border: none;
+  background: white;
+  padding: 0.7em 3em 0.7em 3em;
+  border-radius: 4px;
+}
+
+.UserEditCommentBox form textarea {
+  text-align: center;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 12px 12px 12px 0;
+  margin: 1em 0 0 0;
+  display: block;
+  resize: none;
+  height: 20vh;
 }
 
 .PostEditContainer {

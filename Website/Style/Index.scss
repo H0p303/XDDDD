@@ -519,13 +519,21 @@ body::-webkit-scrollbar {
         background: rgba(255, 244, 244, 0.52);
         border-radius: 4px;
 
-        #CommentDeleteBtn {
-            margin: 0.5em 0 0.5em 0;
+        #CommentEditBtn {
+            margin: 0.5em 0.6em 0.5em 0.6em;
             border: none;
             background: white;
             padding: 0.2em 3em 0.2em 3em;
             border-radius: 4px;
         }
+
+        // #CommentEditBtn {
+        //     border: none;
+        //     background: white;
+        //     padding: 0.01em 0.6em 0.01em 0.6em;
+        //     border-radius: 4px;
+        //     font-size: 14px;
+        // }
     }
 
     #CommentBody {
@@ -583,6 +591,51 @@ body::-webkit-scrollbar {
 
     #CommentID {
         display: none;
+    }
+}
+
+.UserEditCommentBox {
+    position: fixed;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+
+    form {
+        width: 25%;
+        margin: 0 auto;
+
+        label {
+            display: inline-block;
+        }
+
+        input {
+            text-align: center;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 12px 12px 12px 0;
+            display: block;
+        }
+
+        button {
+            margin: 2em 1em 2em 1em;
+            border: none;
+            background: white;
+            padding: 0.7em 3em 0.7em 3em;
+            border-radius: 4px;
+        }
+
+        textarea {
+            text-align: center;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 12px 12px 12px 0;
+            margin: 1em 0 0 0;
+            display: block;
+            resize: none;
+            height: 20vh;
+        }
     }
 }
 
