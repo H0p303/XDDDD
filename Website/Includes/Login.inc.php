@@ -7,14 +7,9 @@ if(isset($_POST['Login_Button'])){
     $mailuid = $_POST['uName'];
     $Pwd = $_POST['uPass'];
 
-    $sql = "SELECT ActiveUser FROM users WHERE UserName=$mailuid";
-    $result = $conn->query($sql);
-    if($result->num_rows > 0){
-        $row = $result->fetch_assoc();
-        echo $row['ActiveUser'];
-    }
+    
     //checks if either field is empty and redirects if necessary
-    if(empty($mailuid) || empty($Pwd) || $row['ActiveUser'] == 0){
+    if(empty($mailuid) || empty($Pwd)){
         header("Location: ../PHP/Index.php?error=emptyfieldsOrInactiveUser");
         exit();
     }
